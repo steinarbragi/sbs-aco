@@ -1,0 +1,6 @@
+[submodule "acop2"]
+	path = acop2
+	url = https://github.com/pjmattingly/ant-colony-optimization.git
+[submodule "aco"]
+	path = aco
+	url = https://github.com/ppoffice/ant-colony-tsp.git
