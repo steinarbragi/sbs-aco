@@ -3,7 +3,7 @@ import math
 from aco import ACO, Graph
 from plot import plot
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 
 def distance(city1: dict, city2: dict):
@@ -54,7 +54,13 @@ def main():
     for i in range(generations):
         plt.plot( range(len(all_converge[i])), all_converge[i], '#82848c', alpha=0.3)
 
+    plt.plot(range(num_ants), np.mean(all_converge,axis=0), 'r-', alpha=1)
+    plt.plot( range(len(all_converge[0])), all_converge[0], 'b-', alpha=1)
+    plt.plot( range(len(all_converge[generations-1])), all_converge[generations-1], 'g-', alpha=1)
+
     #plt.plot( range(len(all_best_costs)), all_best_costs)
+    plt.xlabel('Ants')
+    plt.ylabel('Cost (Distance)')
     plt.show()
 
 #    plot(points, path)
