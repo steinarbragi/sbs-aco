@@ -49,6 +49,7 @@ class ACO(object):
         best_solution = []
         all_best_cost = []
         all_converge = []
+        total_converge = []
         for gen in range(self.generations):
             # noinspection PyUnusedLocal
             ants = [_Ant(self, graph) for i in range(self.ant_count)]
@@ -67,7 +68,7 @@ class ACO(object):
                 if ant.total_cost < gen_best:
                     gen_best = ant.total_cost
                 gen_converge.append(gen_best)
-
+                total_converge.append(best_cost)
                 # update pheromone
                 ant._update_pheromone_delta()
 
@@ -75,7 +76,7 @@ class ACO(object):
             
             self._update_pheromone(graph, ants)
             # print('generation #{}, best cost: {}, path: {}'.format(gen, best_cost, best_solution))
-        return best_solution, best_cost, all_converge
+        return best_solution, best_cost, all_converge, total_converge
 
 
 class _Ant(object):

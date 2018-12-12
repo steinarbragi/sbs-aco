@@ -48,20 +48,29 @@ def main():
     aco = ACO(num_ants, generations, alpha, beta, rho, q, strategy)
     graph = Graph(cost_matrix, rank)
     #path, cost, all_costs, all_paths, all_best_costs, all_best_paths, all_gen_best_costs = aco.solve(graph)
-    path, cost, all_converge = aco.solve(graph)
+    path, cost, all_converge, total_converge = aco.solve(graph)
     print('cost: {}, path: {}'.format(cost, path))
 
+    f, (ax1, ax2) = plt.subplots(1, 2,sharey=True)
+
+    ax1.plot(range(num_ants), np.mean(all_converge,axis=0), 'r-', alpha=1, label="mean")
+
     for i in range(generations):
-        plt.plot( range(len(all_converge[i])), all_converge[i], '#82848c', alpha=0.3)
+        ax1.plot( range(len(all_converge[i])), all_converge[i], '#82848c', alpha=0.3)
 
-    plt.plot(range(num_ants), np.mean(all_converge,axis=0), 'r-', alpha=1)
-    plt.plot( range(len(all_converge[0])), all_converge[0], 'b-', alpha=1)
-    plt.plot( range(len(all_converge[generations-1])), all_converge[generations-1], 'g-', alpha=1)
+    ax1.set_title('Generations')
+    ax2.set_title('Convergence (lowest cost found)')
+    
+    ax1.set(xlabel="Ants", ylabel="Cost (Distance)")
+    ax2.set(xlabel="Ants",)
 
-    #plt.plot( range(len(all_best_costs)), all_best_costs)
-    plt.xlabel('Ants')
-    plt.ylabel('Cost (Distance)')
+    ax2.plot(range(len(total_converge)), total_converge)
+    
+    #plt.xlabel('Ants')
+    #plt.ylabel('Cost (Distance)')
+    #plt.legend(['mean','iteration'])
     plt.show()
+
 
 #    plot(points, path)
 
