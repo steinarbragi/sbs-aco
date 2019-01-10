@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def distance(city1: dict, city2: dict):
-    return math.sqrt((city1['x'] - city2['x']) ** 2 + (city1['y'] - city2['y']) ** 2)
+def distance(loc1: dict, loc2: dict):
+    return math.sqrt((loc1['x'] - loc2['x']) ** 2 + (loc1['y'] - loc2['y']) ** 2)
 
 
 def main():
@@ -31,7 +31,7 @@ def main():
     rho = 2  
     q = 0.2 
     strategy = 2
-
+    
 
     with open('./data/berlin.txt') as f:
         for line in f.readlines():
@@ -62,7 +62,7 @@ def main():
     ax2.set_title('Convergence (lowest cost found)')
     
     ax1.set(xlabel="Ants", ylabel="Cost (Distance)")
-    ax2.set(xlabel="Ants",)
+    ax2.set(xlabel="Ants * Generations",)
 
     ax2.plot(range(len(total_converge)), total_converge)
     

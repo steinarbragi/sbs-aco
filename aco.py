@@ -32,7 +32,6 @@ class ACO(object):
         self.ant_count = ant_count
         self.generations = generations
         self.update_strategy = strategy
-
     def _update_pheromone(self, graph: Graph, ants: list):
         for i, row in enumerate(graph.pheromone):
             for j, col in enumerate(row):
@@ -93,6 +92,7 @@ class _Ant(object):
         self.tabu.append(start)
         self.current = start
         self.allowed.remove(start)
+        
 
     def _select_next(self):
         denominator = 0
@@ -121,7 +121,6 @@ class _Ant(object):
         self.total_cost += self.graph.matrix[self.current][selected]
         self.current = selected
 
-    # noinspection PyUnusedLocal
     def _update_pheromone_delta(self):
         self.pheromone_delta = [[0 for j in range(self.graph.rank)] for i in range(self.graph.rank)]
         for _ in range(1, len(self.tabu)):
